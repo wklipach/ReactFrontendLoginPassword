@@ -1,32 +1,63 @@
-# React + TypeScript + Vite
+# React Auth Boilerplate
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Минимальный шаблон для React-приложения с готовой аутентификацией.
 
-Currently, two official plugins are available:
+## Стек
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + TypeScript  
+- Vite (быстрая сборка)  
+- Redux Toolkit (управление состоянием, хранение токена)  
+- React Router v6 (маршрутизация, приватные страницы)  
+- Ant Design (UI-компоненты)  
+- CSS Modules (изолированные стили)
 
-## React Compiler
+## Возможности
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ✅ Страница входа с валидацией  
+- ✅ Приватный маршрут (доступ только после входа)  
+- ✅ Хранение токена и пользователя в localStorage  
+- ✅ Автоматический редирект на логин при отсутствии токена  
+- ✅ Красивый интерфейс на Ant Design  
 
-## Expanding the Oxlint configuration
+## Установка и запуск
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+```bash
+# Клонируйте репозиторий
+git clone https://github.com/wklipach/ReactFrontendLoginPassword.git
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+# Перейдите в папку проекта
+cd ReactFrontendLoginPassword
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+# Установите зависимости
+npm install
+
+# Запустите в режиме разработки
+npm run dev
+
+Приложение будет доступно по адресу: http://localhost:5173
+Тестовые данные
+
+Для входа используйте:
+
+    Логин: admin
+
+    Пароль: admin
+
+Структура проекта
+text
+
+src/
+├── pages/
+│   ├── Login.tsx
+│   └── Dashboard.tsx
+├── store/
+│   ├── store.ts
+│   └── authSlice.ts
+├── styles/
+│   └── global.css
+├── App.tsx
+└── main.tsx
+
+Лицензия
+
+MIT — свободно используйте в своих проектах.
