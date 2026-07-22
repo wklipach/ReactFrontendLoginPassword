@@ -1,38 +1,60 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store/authSlice';
-
-import { Button, Card, Space, Typography } from 'antd';
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { Layout } from 'antd';
+import Split from 'react-split'; // импорт сплиттера
+import MainMenu from '../components/MainMenu';
+import WindowContainer from '../components/WindowContainer';
+import DockPanel from '../components/DockPanel';
+import { useWindowStore } from '../store/useWindowStore';
 import styles from './Dashboard.module.css';
 
-const { Title, Text } = Typography;
+const { Header, Content } = Layout;
 
-const Dashboard = () => {
-  const user = useSelector((state: any) => state.auth.user);
-  const dispatch = useDispatch();
+const Dashboard: React.FC = () => {
+  const windows = useWindowStore((state) => state.windows);
 
-return (
-    <div className={styles.container}>
-      <Card>
-        <Space vertical size="large" style={{ width: '100%' }}>
-          <Title level={2}>
-            <UserOutlined /> Добро пожаловать, {user?.name}!
-          </Title>
-          <Text>Это главная страница. Вы успешно вошли.</Text>
-          <Button
-            type="primary"
-            danger
-            icon={<LogoutOutlined />}
-            onClick={() => dispatch(logout())}
+  return (
+    <Layout className={styles.layout}>
+      <Header className={styles.header}>
+        <div className={styles.logo}>Моё приложение</div>
+        <MainMenu />
+      </Header>
+
+      {/* Основная часть без статического Sider */}
+      <Layout style={{ height: 'calc(100vh - 64px)' }}> {/* 64px - высота хедера */}
+        <Content style={{ padding: 0, overflow: 'hidden' }}>
+          {/* Сплиттер между деревом и таблицей */}
+          <Split
+            sizes={[20, 80]}                // начальные проценты ширины
+            minSize={[150, 300]}            // минимальная ширина для каждой панели
+            gutterSize={6}                  // толщина полосы разделителя
+            direction="horizontal"          // горизонтальное разделение
+            cursor="col-resize"             // курсор при наведении
+            style={{ display: 'flex', height: '100%' }}
           >
-            Выйти
-          </Button>
-        </Space>
-      </Card>
-    </div>
+            {/* Левая панель - дерево */}
+            <div style={{ padding: 16, background: '#fafafa', overflow: 'auto' }}>
+              <div>Дерево (заглушка)</div>
+              {/* Здесь позже будет ваш компонент дерева */}
+            </div>
+
+            {/* Правая панель - таблица + слой окон */}
+            <div style={{ padding: 16, position: 'relative', overflow: 'auto' }}>
+              <div>Таблица (заглушка)</div>
+
+              {/* Слой плавающих окон - он будет поверх таблицы */}
+              <div className={styles.windowLayer}>
+                {windows.map((win) => (
+                  <WindowContainer key={win.id} window={win} />
+                ))}
+              </div>
+            </div>
+          </Split>
+        </Content>
+      </Layout>
+
+      <DockPanel />
+    </Layout>
   );
-  
 };
 
 export default Dashboard;

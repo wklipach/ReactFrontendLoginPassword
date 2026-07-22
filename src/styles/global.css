@@ -8,3 +8,33 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #f0f2f5;
 }
+
+/* Разделитель сплиттера */
+.gutter {
+  background-color: #e8e8e8;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transition: background-color 0.2s ease;
+}
+
+/* Горизонтальный разделитель (колонки) */
+.gutter-horizontal {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrDCiJQ0wQhIwgAUgYAGQAAJ5o0jAAAAAASUVORK5CYII=');
+  cursor: col-resize;
+}
+
+/* Эффект при наведении */
+.gutter-horizontal:hover {
+  background-color: #1890ff;
+  background-image: none; /* убираем старый узор, можно оставить */
+}
+
+/* Если используете вертикальный сплиттер (строки) */
+.gutter-vertical {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAMAAAB3qV1tAAAAJXRFWHRTb2Z0d2FyZQBNYWNyb21lZGlhIEZpcmV3b3JrcyBNb3ppbGxhYXCv8r4qAAAAF1BMVEUAAAD///9/f39/f39/f39/f39/f39/fz/7Dw4AAAAaSURBVHgBZcALEgAgCENNwz9/P3BpA4bwv0wF6QA/7cBUgAAAABJRU5ErkJggg==');
+  cursor: row-resize;
+}
+
+.gutter-vertical:hover {
+  background-color: #1890ff;
+}

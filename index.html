@@ -8,6 +8,10 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Полифилл для process -->
+    <script>
+      window.process = { env: {} };
+    </script>    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
