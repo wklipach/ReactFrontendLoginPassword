@@ -1,19 +1,16 @@
 import React from 'react';
 import { Button } from 'antd';
-import { useWindowStore, type AppWindow } from '../../store/useWindowStore'; 
+import { useWindowStore } from '../../store/useWindowStore';
 import { WindowsOutlined } from '@ant-design/icons';
 
 const DockPanel: React.FC = () => {
+  // Берём ВСЕ окна (не только свёрнутые)
   const windows = useWindowStore((state) => state.windows);
   const toggleMinimize = useWindowStore((state) => state.toggleMinimize);
   const focusWindow = useWindowStore((state) => state.focusWindow);
 
-  // Указываем тип для фильтрованного массива
-  const minimizedWindows: AppWindow[] = windows.filter((w) => w.isMinimized);
-
-  if (minimizedWindows.length === 0) {
-    return null;
-  }
+  // Если окон нет, панель не показываем
+  if (windows.length === 0) return null;
 
   return (
     <div
@@ -35,15 +32,23 @@ const DockPanel: React.FC = () => {
       }}
     >
       <WindowsOutlined style={{ marginRight: 8, color: '#1890ff' }} />
-      {minimizedWindows.map((win) => (   // теперь win автоматически имеет тип AppWindow
+      {windows.map((win) => (
         <Button
           key={win.id}
           size="small"
           onClick={() => {
+            // Переключаем состояние свёрнутости
             toggleMinimize(win.id);
+            // Если окно было свёрнуто, оно развернётся, и мы поднимем его наверх
+            // Если оно было развёрнуто, оно свернётся, focusWindow не помешает
             focusWindow(win.id);
           }}
-          style={{ flexShrink: 0 }}
+          style={{
+            flexShrink: 0,
+            // Можно добавить визуальный признак, что окно активно (не свёрнуто)
+            backgroundColor: win.isMinimized ? undefined : '#e6f7ff',
+            borderColor: win.isMinimized ? undefined : '#1890ff',
+          }}
         >
           {win.title}
         </Button>
