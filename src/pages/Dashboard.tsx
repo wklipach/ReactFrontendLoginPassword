@@ -6,6 +6,7 @@ import WindowContainer from '../components/WindowContainer';
 import DockPanel from '../components/DockPanel';
 import { useWindowStore } from '../store/useWindowStore';
 import styles from './Dashboard.module.css';
+import DataGrid from '../components/tables/DataGrid';
 
 const { Header, Content } = Layout;
 
@@ -38,8 +39,13 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Правая панель - таблица + слой окон */}
-            <div style={{ padding: 16, position: 'relative', overflow: 'auto' }}>
-              <div>Таблица (заглушка)</div>
+            <div style={{ padding: 0, position: 'relative', display: 'flex', flexDirection: 'column', height: '100%' }}>
+               <DataGrid />
+              <div className={styles.windowLayer}>
+                {windows.map((win) => (
+                  <WindowContainer key={win.id} window={win} />
+                ))}
+              </div>
 
               {/* Слой плавающих окон - он будет поверх таблицы */}
               <div className={styles.windowLayer}>
