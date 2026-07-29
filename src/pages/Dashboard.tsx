@@ -7,6 +7,7 @@ import DockPanel from '../components/DockPanel';
 import { useWindowStore } from '../store/useWindowStore';
 import styles from './Dashboard.module.css';
 import DataGrid from '../components/tables/DataGrid';
+import DataTree from '../components/trees/DataTree';
 
 const { Header, Content } = Layout;
 
@@ -34,7 +35,9 @@ const Dashboard: React.FC = () => {
           >
             {/* Левая панель - дерево */}
             <div style={{ padding: 16, background: '#fafafa', overflow: 'auto' }}>
-              <div>Дерево (заглушка)</div>
+              <div>Дерево (заглушка)
+                <DataTree />
+              </div>
               {/* Здесь позже будет ваш компонент дерева */}
             </div>
 

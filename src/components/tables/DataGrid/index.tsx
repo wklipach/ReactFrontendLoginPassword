@@ -8,7 +8,7 @@ import {
   ReloadOutlined,
   ExportOutlined,
 } from '@ant-design/icons';
-import DataTable from '../DataTable';
+import DataTable from '../BaseGrid';
 import { getColumns } from './columns';
 import { generateMockData } from '../../../utils/mockData';
 
