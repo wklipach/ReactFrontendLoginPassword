@@ -50,12 +50,6 @@ const Dashboard: React.FC = () => {
                 ))}
               </div>
 
-              {/* Слой плавающих окон - он будет поверх таблицы */}
-              <div className={styles.windowLayer}>
-                {windows.map((win) => (
-                  <WindowContainer key={win.id} window={win} />
-                ))}
-              </div>
             </div>
           </Split>
         </Content>

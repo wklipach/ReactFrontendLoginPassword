@@ -115,6 +115,8 @@ const WindowContainer: React.FC<Props> = ({ window }) => {
           borderRadius: 8,
           overflow: 'hidden',
           boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+          willChange: 'transform', // ← добавить
+          backfaceVisibility: 'hidden'
         }}
       >
         {/* Шапка окна */}

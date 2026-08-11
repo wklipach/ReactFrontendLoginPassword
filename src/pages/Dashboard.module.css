@@ -28,4 +28,6 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
+  isolation: isolate;
+  z-index: 9999;
 }
